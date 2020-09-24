@@ -1,7 +1,9 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_firebase_provider/models/user.dart';
 import 'package:flutter_firebase_provider/services/counter_service.dart';
-import 'package:flutter_firebase_provider/views/home_page.dart';
+import 'package:flutter_firebase_provider/services/user_service.dart';
+import 'package:flutter_firebase_provider/views/wrapper.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
@@ -12,6 +14,9 @@ void main() async {
       providers: [
         ChangeNotifierProvider(
           create: (context) => CounterService(),
+        ),
+        StreamProvider<MyUser>.value(
+          value: UserService().user,
         )
       ],
       child: MyApp(),
@@ -28,7 +33,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: HomePage(title: 'Flutter Demo Home Page'),
+      home: Wrapper(),
     );
   }
 }
