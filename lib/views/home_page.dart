@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_firebase_provider/services/counter_service.dart';
+import 'package:flutter_firebase_provider/services/user_service.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
@@ -11,13 +12,22 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-
+  final UserService _auth = UserService();
   @override
   Widget build(BuildContext context) {
     final CounterService counter = Provider.of<CounterService>(context);
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? ''),
+        actions: <Widget>[
+          FlatButton.icon(
+            icon: Icon(Icons.person),
+            label: Text('Logout'),
+            onPressed: () async {
+              await _auth.signOut();
+            },
+          )
+        ],
       ),
       body: Center(
         child: Column(
