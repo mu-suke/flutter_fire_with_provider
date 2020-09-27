@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_firebase_provider/constaints/loading.dart';
+import 'package:flutter_firebase_provider/constaints/textInputDecoration.dart';
 import 'package:flutter_firebase_provider/services/user_service.dart';
 
 class SignInPage extends StatefulWidget {
@@ -13,6 +15,9 @@ class _SignInPageState extends State<SignInPage> {
   final UserService _auth = UserService();
   final _formKey = GlobalKey<FormState>();
 
+  bool loading = false;
+
+//  text field state
   String email = '';
   String password = '';
   String error = '';
@@ -28,7 +33,7 @@ class _SignInPageState extends State<SignInPage> {
             icon: const Icon(Icons.person),
             label: const Text('Register'))
       ]),
-      body: Container(
+      body: loading ? Loading() : Container(
         padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
         child: Form(
             key: _formKey,
@@ -36,6 +41,7 @@ class _SignInPageState extends State<SignInPage> {
               children: <Widget>[
                 SizedBox(height: 20.0),
                 TextFormField(
+                  decoration: textInputDecoration.copyWith(hintText: 'E-mail'),
                   validator: (val) => val.isEmpty ? 'Enter an E-mail' : null,
                   onChanged: (val) {
                     setState(() {
@@ -45,6 +51,7 @@ class _SignInPageState extends State<SignInPage> {
                 ),
                 SizedBox(height: 20.0),
                 TextFormField(
+                  decoration: textInputDecoration.copyWith(hintText: 'Password'),
                   obscureText: true,
                   validator: (val) => val.length < 6 ? 'Enter a Password 6+ chars long' : null,
                   onChanged: (val) {
@@ -65,10 +72,14 @@ class _SignInPageState extends State<SignInPage> {
                       print('valid');
                       print(email);
                       print(password);
+                      setState(() {
+                        loading = true;
+                      });
                       dynamic result = await _auth.signInWithEmailAndPassword(email, password);
                       if (result == null) {
                         setState(() {
                           error = 'could not sign in with those credentials';
+                          loading = false;
                         });
                       }
                     }
