@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_firebase_provider/services/database_service.dart';
 import 'package:flutter_firebase_provider/models/user.dart';
 
 class UserService with ChangeNotifier {
@@ -31,6 +31,9 @@ class UserService with ChangeNotifier {
     try {
       UserCredential result = await _auth.createUserWithEmailAndPassword(email: email, password: password);
       User user = result.user;
+//      Create a new document for the user with the uid
+      await DatabaseService(uid: result.user.uid).updateUserData('10', 'yusuke', 50);
+
       return _userFromFirebaseUser(user);
     } catch (error) {
       print(error.toString());
