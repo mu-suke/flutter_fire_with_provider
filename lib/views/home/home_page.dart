@@ -53,11 +53,6 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
         body: PostList(),
-        floatingActionButton: FloatingActionButton(
-          onPressed: counter.increment,
-          tooltip: 'Increment',
-          child: Icon(Icons.add),
-        ),
       ),
     );
   }
