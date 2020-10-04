@@ -16,6 +16,7 @@ class PostTile extends StatelessWidget {
           leading: CircleAvatar(
             radius: 25.0,
             backgroundColor: Colors.brown[post.strength],
+            backgroundImage: AssetImage('assets/coffee_icon.png'),
           ),
           title: Text(post.name),
           subtitle: Text('Takes ${post.sugars} sugar(s)'),

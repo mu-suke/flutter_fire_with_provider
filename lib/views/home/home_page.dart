@@ -52,7 +52,15 @@ class _HomePageState extends State<HomePage> {
                 label: Text('Settings'))
           ],
         ),
-        body: PostList(),
+        body: Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage('assets/coffee_bg.png'),
+              fit: BoxFit.cover
+            )
+          ),
+            child: PostList()
+        ),
       ),
     );
   }
