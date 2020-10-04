@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_firebase_provider/models/post.dart';
 import 'package:flutter_firebase_provider/services/counter_service.dart';
@@ -7,7 +6,6 @@ import 'package:flutter_firebase_provider/views/home/post_list.dart';
 import 'package:flutter_firebase_provider/views/home/settings_form.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_firebase_provider/services/database_service.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key key, this.title}) : super(key: key);
